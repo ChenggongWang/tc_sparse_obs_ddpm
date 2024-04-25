@@ -58,7 +58,13 @@ class Diffusion_model():
         self.sqrt_recip_alphas = sqrt_recip_alphas
         self.posterior_variance = posterior_variance
 
-        
+        # initalize later
+        self.model = None
+        self.optimizer = None
+        self.image_size = None
+        self.channels = None
+        self.device = None
+
     # Algorithm 1
     # forward diffusion (using the nice property)
     def q_sample(self, x_start, t, noise=None):

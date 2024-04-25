@@ -119,10 +119,18 @@ def main():
     tc_diff_model.optimizer = optimizer
     tc_diff_model.image_size = image_size
     tc_diff_model.channels = channels
-    train(tc_diff_model, 
-          dataloader, validation_data, val_loader, obs_ratio, 
-          results_folder, epochs = 4)
     
-    print('trainning donw. model are saved at: ', results_folder)
+    loss_train_all, loss_valid_all = train(
+        tc_diff_model, 
+        dataloader, validation_data, val_loader, obs_ratio, 
+        results_folder, epochs = 4
+        )
+    fig, ax = plt.subplots()
+    plt.plot(loss_train_all,label='train')
+    plt.plot(loss_valid_all,label='validation')
+    plt.legend()
+    plt.savefig(results_folder/'loss.png')
+    
+    print('trainning done. model are saved at: ', results_folder)
 if __name__ == "__main__":
     main()
