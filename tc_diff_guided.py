@@ -114,6 +114,7 @@ class Diffusion_model():
     # https://lilianweng.github.io/posts/2021-07-11-diffusion-models/
     @torch.no_grad()
     def p_sample(self, model, x, t, t_index, obs_ratio, x_cond=None):
+        model.eval()
         betas_t = extract(self.betas, t, x.shape)
         sqrt_one_minus_alphas_cumprod_t = extract(
             self.sqrt_one_minus_alphas_cumprod, t, x.shape
